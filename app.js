@@ -21,7 +21,7 @@ app.use(
       "https://www.jaguarshop.me",
       "https://www.jaguarshop.live",
       "https://jaguarshop.live",
-      "https://datn-rosy-one.vercel.app/",
+      "https://duantn-test.vercel.app/",
     ],
     headers: ["Content-Type"],
     credentials: true,
@@ -55,7 +55,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+},indexRouter)
 app.use("/users", usersRouter);
 app.use("/products", productRouter);
 app.use("/admin", adminRouter);
@@ -83,5 +86,10 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+const port = process.env.PORT || 4000;
 
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 module.exports = app;
