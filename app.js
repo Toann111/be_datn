@@ -8,6 +8,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const app = express();
 var favicon = require("serve-favicon");
+var router = express.Router();
 //inset dotenv
 require("dotenv").config();
 app.use(
@@ -82,6 +83,13 @@ app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug"); // Sử dụng pug (trước đây gọi là jade)
+
+router.get('/', function(req, res, next) {
+  res.render('index'); // Đây là nơi Express sẽ tìm tệp 'index'
 });
 
 module.exports = app;
