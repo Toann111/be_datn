@@ -55,10 +55,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use("/", indexRouter);
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-},indexRouter)
+app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productRouter);
 app.use("/admin", adminRouter);
@@ -86,10 +83,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-const port = process.env.PORT || 4000;
 
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
 module.exports = app;
